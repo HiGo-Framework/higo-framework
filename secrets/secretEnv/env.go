@@ -143,8 +143,7 @@ func (s *secretEnv) GetSecretAsString(key string, defaultValue string) string {
 }
 
 func NewSecretFromEnv() (secrets.Secret, error) {
-	err := dotenv.Load()
-	if err != nil {
+	if err := dotenv.Load(); err != nil && !os.IsNotExist(err) {
 		return nil, err
 	}
 	return &secretEnv{}, nil
