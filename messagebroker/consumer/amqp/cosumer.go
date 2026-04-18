@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log/slog"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/rabbitmq/amqp091-go"
@@ -30,11 +31,65 @@ type csmr struct {
 	ctxPool          sync.Pool
 	chanErr          chan error
 	chanOk           chan struct{}
+
+	// Per-queue readiness — populated once in Start() from c.stack.
+	// Map structure is immutable after Start() begins; only the *atomic.Bool
+	// values flip, so concurrent reads are lock-free and safe.
+	queueStatus    map[string]*atomic.Bool
+	readyOrder     []string    // stable iteration order for aggregate computation
+	aggregateState atomic.Bool // tracks "all queues ready?" for transition detection
 }
 
 // Status implements consumer.Consumer.
 func (c *csmr) Status() (ok chan struct{}, err chan error) {
 	return c.chanOk, c.chanErr
+}
+
+// IsQueueReady implements consumer.Consumer. Returns false if queue is
+// unknown or currently not consuming.
+func (c *csmr) IsQueueReady(name string) bool {
+	flag, ok := c.queueStatus[name]
+	if !ok {
+		return false
+	}
+	return flag.Load()
+}
+
+// setQueueReady flips the per-queue ready flag and, on aggregate transition,
+// fires chanOk (any-down → all-up) or chanErr (all-up → any-down).
+// Safe for concurrent callers since per-queue flags are atomic and the
+// aggregateState Swap guarantees only one goroutine observes each transition.
+func (c *csmr) setQueueReady(name string, ready bool) {
+	flag, ok := c.queueStatus[name]
+	if !ok {
+		return
+	}
+	flag.Store(ready)
+
+	allReady := true
+	for _, n := range c.readyOrder {
+		if !c.queueStatus[n].Load() {
+			allReady = false
+			break
+		}
+	}
+
+	prev := c.aggregateState.Swap(allReady)
+	if prev == allReady {
+		return // no transition
+	}
+	if allReady {
+		select {
+		case c.chanOk <- struct{}{}:
+		default:
+		}
+		return
+	}
+	err := fmt.Errorf("consumer queue %q lost readiness", name)
+	select {
+	case c.chanErr <- err:
+	default:
+	}
 }
 
 // Consume implements consumer.Consumer.
@@ -83,6 +138,19 @@ func (c *csmr) Use(handlers ...consumer.ConsumeHandler) consumer.ConsumerBuilder
 	return c
 }
 func (c *csmr) Start(ctx context.Context) error {
+	if len(c.stack) == 0 {
+		return fmt.Errorf("no routing consumer was define")
+	}
+
+	// Snapshot queue names from c.stack into an immutable status map.
+	// After this point, no keys are added/removed — only atomic values flip.
+	c.queueStatus = make(map[string]*atomic.Bool, len(c.stack))
+	c.readyOrder = make([]string, 0, len(c.stack))
+	for _, s := range c.stack {
+		c.queueStatus[s.queueName] = &atomic.Bool{}
+		c.readyOrder = append(c.readyOrder, s.queueName)
+	}
+
 	eg, gctx := errgroup.WithContext(ctx)
 	chanStack := make(chan amqpStack, len(c.stack))
 	eg.Go(func() error {
@@ -90,24 +158,14 @@ func (c *csmr) Start(ctx context.Context) error {
 		compiledStack := make([]amqpStack, 0, len(c.stack))
 		for _, stack := range c.stack {
 			stack.handlers = append(c.globalMiddleware, stack.handlers...)
-			fmt.Printf("stack.handlers: %v\n", stack.handlers)
 			compiledStack = append(compiledStack, stack)
 		}
 		for range c.man.Ready() {
-			slog.InfoContext(ctx, "connection ready, time to create consumer topology")
-			if len(c.stack) == 0 {
-				return fmt.Errorf("no routing consumer was define")
-			}
-			select {
-			case c.chanOk <- struct{}{}:
-			default:
-			}
-
+			slog.InfoContext(ctx, "connection ready, dispatching consumer topology")
 			for _, stack := range compiledStack {
 				slog.InfoContext(ctx, "create consumer topology", slog.Any("stackQueue", stack.queueName))
 				chanStack <- stack
 			}
-
 		}
 		return nil
 	})
@@ -179,7 +237,12 @@ func (c *csmr) startConsuming(gctx context.Context, stack amqpStack) error {
 	if err != nil {
 		return fmt.Errorf("error when try to consume %s: %w", stack.queueName, err)
 	}
-	//select
+
+	// Subscribe succeeded — queue is now consuming. Mark ready and ensure
+	// we flip back to not-ready on any return path (error, reconnect, ctx cancel).
+	c.setQueueReady(stack.queueName, true)
+	defer c.setQueueReady(stack.queueName, false)
+
 	for {
 		select {
 		case err := <-closeNotif:

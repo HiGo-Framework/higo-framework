@@ -29,4 +29,5 @@ type Consumer interface {
 	ConsumerBuilder
 	Start(ctx context.Context) error
 	Status() (ok chan struct{}, err chan error)
+	IsQueueReady(name string) bool
 }
