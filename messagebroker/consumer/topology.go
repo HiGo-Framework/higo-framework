@@ -2,7 +2,7 @@ package consumer
 
 import (
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/triasbrata/higo/utils"
+	"github.com/triasbrata/higo-framework/utils"
 )
 
 type AmqpTopologyConsumer struct {

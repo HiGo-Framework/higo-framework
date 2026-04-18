@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/triasbrata/higo/messagebroker/broker"
-	"github.com/triasbrata/higo/messagebroker/consumer"
-	"github.com/triasbrata/higo/messagebroker/consumer/amqp"
+	"github.com/triasbrata/higo-framework/messagebroker/broker"
+	"github.com/triasbrata/higo-framework/messagebroker/consumer"
+	"github.com/triasbrata/higo-framework/messagebroker/consumer/amqp"
 )
 
 // Consumer implements broker.Broker.

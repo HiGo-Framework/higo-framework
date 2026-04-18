@@ -3,8 +3,8 @@ package impl
 import (
 	"sync"
 
-	"github.com/triasbrata/higo/messagebroker/manager"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/manager"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
 )
 
 type manCon[T manager.ShouldConnectionHave] struct {

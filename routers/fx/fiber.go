@@ -1,7 +1,7 @@
 package routersfx
 
 import (
-	"github.com/triasbrata/higo/routers/impl"
+	"github.com/triasbrata/higo-framework/routers/impl"
 	"go.uber.org/fx"
 )
 

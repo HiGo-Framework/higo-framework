@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	httpfetcher "github.com/triasbrata/higo/httpFetcher"
+	httpfetcher "github.com/triasbrata/higo-framework/httpFetcher"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

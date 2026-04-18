@@ -6,8 +6,8 @@ import (
 	"net"
 	"sync/atomic"
 
-	"github.com/triasbrata/higo/instrumentation"
-	"github.com/triasbrata/higo/pyroscope"
+	"github.com/triasbrata/higo-framework/instrumentation"
+	"github.com/triasbrata/higo-framework/pyroscope"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/metric"

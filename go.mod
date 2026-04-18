@@ -1,4 +1,4 @@
-module github.com/triasbrata/higo
+module github.com/triasbrata/higo-framework
 
 go 1.24.2
 

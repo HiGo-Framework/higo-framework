@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/contrib/otelfiber/v2"
 	"github.com/gofiber/fiber/v2"
-	"github.com/triasbrata/higo/routers"
+	"github.com/triasbrata/higo-framework/routers"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"

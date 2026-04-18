@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/triasbrata/higo/messagebroker/consumer"
-	"github.com/triasbrata/higo/messagebroker/manager"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/consumer"
+	"github.com/triasbrata/higo-framework/messagebroker/manager"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
 	"golang.org/x/sync/errgroup"
 )
 

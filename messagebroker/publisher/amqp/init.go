@@ -8,12 +8,12 @@ import (
 	"time"
 
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/triasbrata/higo/instrumentation"
-	"github.com/triasbrata/higo/messagebroker/manager"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
-	"github.com/triasbrata/higo/messagebroker/publisher"
-	"github.com/triasbrata/higo/messagebroker/publisher/envelop"
-	"github.com/triasbrata/higo/utils"
+	"github.com/triasbrata/higo-framework/instrumentation"
+	"github.com/triasbrata/higo-framework/messagebroker/manager"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher/envelop"
+	"github.com/triasbrata/higo-framework/utils"
 	"go.opentelemetry.io/otel/trace"
 	"golang.org/x/sync/errgroup"
 )

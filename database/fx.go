@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/triasbrata/higo/database/rds"
-	"github.com/triasbrata/higo/database/rds/driverSwitcher"
+	"github.com/triasbrata/higo-framework/database/rds"
+	"github.com/triasbrata/higo-framework/database/rds/driverSwitcher"
 	"go.uber.org/fx"
 )
 

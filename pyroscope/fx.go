@@ -7,7 +7,7 @@ import (
 	"runtime"
 
 	py "github.com/grafana/pyroscope-go"
-	"github.com/triasbrata/higo/instrumentation"
+	"github.com/triasbrata/higo-framework/instrumentation"
 	"go.uber.org/fx"
 )
 

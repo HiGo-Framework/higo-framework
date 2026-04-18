@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"reflect"
 
-	"github.com/triasbrata/higo/messagebroker/publisher"
-	"github.com/triasbrata/higo/messagebroker/publisher/envelop"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher/envelop"
 	"go.opentelemetry.io/otel"
 )
 

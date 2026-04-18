@@ -1,8 +1,8 @@
 package messagebroker
 
 import (
-	"github.com/triasbrata/higo/messagebroker/broker"
-	"github.com/triasbrata/higo/messagebroker/broker/impl"
+	"github.com/triasbrata/higo-framework/messagebroker/broker"
+	"github.com/triasbrata/higo-framework/messagebroker/broker/impl"
 	"go.uber.org/fx"
 )
 

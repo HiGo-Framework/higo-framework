@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/triasbrata/higo/database/rds"
-	"github.com/triasbrata/higo/database/rds/postgresql"
+	"github.com/triasbrata/higo-framework/database/rds"
+	"github.com/triasbrata/higo-framework/database/rds/postgresql"
 )
 
 func OpenByDriver(param rds.ParamOpenCon) (*sqlx.DB, error) {

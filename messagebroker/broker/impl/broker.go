@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/triasbrata/higo/messagebroker/broker"
+	"github.com/triasbrata/higo-framework/messagebroker/broker"
 )
 
 type brokerConAMQP struct {

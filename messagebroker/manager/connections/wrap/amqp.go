@@ -2,7 +2,7 @@ package wrap
 
 import (
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
 )
 
 type Connection struct {

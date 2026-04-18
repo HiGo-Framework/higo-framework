@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/triasbrata/higo/messagebroker/consumer"
-	"github.com/triasbrata/higo/messagebroker/publisher"
+	"github.com/triasbrata/higo-framework/messagebroker/consumer"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 )

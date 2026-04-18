@@ -5,7 +5,7 @@ import (
 	"database/sql"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/triasbrata/higo/contextw"
+	"github.com/triasbrata/higo-framework/contextw"
 	"go.uber.org/fx"
 )
 

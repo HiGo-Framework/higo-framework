@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/triasbrata/higo/routers"
+	"github.com/triasbrata/higo-framework/routers"
 )
 
 type sFiber struct {

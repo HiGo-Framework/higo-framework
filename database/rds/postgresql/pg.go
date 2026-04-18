@@ -6,8 +6,8 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/triasbrata/higo/database/rds"
-	"github.com/triasbrata/higo/database/rds/utils"
+	"github.com/triasbrata/higo-framework/database/rds"
+	"github.com/triasbrata/higo-framework/database/rds/utils"
 )
 
 type pgdb struct {

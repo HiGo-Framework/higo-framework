@@ -9,7 +9,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/stretchr/testify/assert"
-	"github.com/triasbrata/higo/routers"
+	"github.com/triasbrata/higo-framework/routers"
 )
 
 func setupFiberRouter() *sFiber {

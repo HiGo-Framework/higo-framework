@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"github.com/triasbrata/higo/secrets"
-	"github.com/triasbrata/higo/secrets/utils"
+	"github.com/triasbrata/higo-framework/secrets"
+	"github.com/triasbrata/higo-framework/secrets/utils"
 )
 
 type secJson struct {

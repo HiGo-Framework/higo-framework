@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/triasbrata/higo/messagebroker/broker"
-	"github.com/triasbrata/higo/messagebroker/manager"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
-	"github.com/triasbrata/higo/messagebroker/publisher/amqp"
+	"github.com/triasbrata/higo-framework/messagebroker/broker"
+	"github.com/triasbrata/higo-framework/messagebroker/manager"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher/amqp"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/triasbrata/higo/messagebroker/publisher"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher"
 )
 
 // Publisher implements broker.Broker.

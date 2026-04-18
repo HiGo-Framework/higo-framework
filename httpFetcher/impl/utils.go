@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/bytedance/sonic"
-	httpfetcher "github.com/triasbrata/higo/httpFetcher"
+	httpfetcher "github.com/triasbrata/higo-framework/httpFetcher"
 )
 
 func (s *std) doRequest(ctx context.Context, method string, data interface{}, uri string, msgAction string, opts []httpfetcher.RequestOption) (*http.Response, error) {

@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/triasbrata/higo/messagebroker/manager"
-	"github.com/triasbrata/higo/messagebroker/manager/connections"
-	"github.com/triasbrata/higo/messagebroker/manager/connections/wrap"
-	"github.com/triasbrata/higo/messagebroker/manager/impl"
+	"github.com/triasbrata/higo-framework/messagebroker/manager"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/connections/wrap"
+	"github.com/triasbrata/higo-framework/messagebroker/manager/impl"
 )
 
 func (b *brk) openConnectionAmqp(ctx context.Context, subfix ...any) (manager.Manager[connections.ConnectionAMQP], error) {

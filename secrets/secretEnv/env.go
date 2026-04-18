@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/compose-spec/compose-go/v2/dotenv"
-	"github.com/triasbrata/higo/secrets"
+	"github.com/triasbrata/higo-framework/secrets"
 )
 
 type secretEnv struct {

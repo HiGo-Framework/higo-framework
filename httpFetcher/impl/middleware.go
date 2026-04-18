@@ -3,7 +3,7 @@ package impl
 import (
 	"net/http"
 
-	httpfetcher "github.com/triasbrata/higo/httpFetcher"
+	httpfetcher "github.com/triasbrata/higo-framework/httpFetcher"
 )
 
 type roundTripperFunc func(*http.Request) (*http.Response, error)

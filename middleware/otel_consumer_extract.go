@@ -3,8 +3,8 @@ package middleware
 import (
 	"log"
 
-	"github.com/triasbrata/higo/instrumentation"
-	"github.com/triasbrata/higo/messagebroker/consumer"
+	"github.com/triasbrata/higo-framework/instrumentation"
+	"github.com/triasbrata/higo-framework/messagebroker/consumer"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
 )

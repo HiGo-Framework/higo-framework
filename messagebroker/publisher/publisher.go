@@ -3,7 +3,7 @@ package publisher
 import (
 	"context"
 
-	"github.com/triasbrata/higo/messagebroker/publisher/envelop"
+	"github.com/triasbrata/higo-framework/messagebroker/publisher/envelop"
 )
 
 type PublishPayload struct {
