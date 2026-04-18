@@ -36,7 +36,6 @@ type csmr struct {
 	// Map structure is immutable after Start() begins; only the *atomic.Bool
 	// values flip, so concurrent reads are lock-free and safe.
 	queueStatus    map[string]*atomic.Bool
-	readyOrder     []string    // stable iteration order for aggregate computation
 	aggregateState atomic.Bool // tracks "all queues ready?" for transition detection
 }
 
@@ -67,8 +66,8 @@ func (c *csmr) setQueueReady(name string, ready bool) {
 	flag.Store(ready)
 
 	allReady := true
-	for _, n := range c.readyOrder {
-		if !c.queueStatus[n].Load() {
+	for _, flag := range c.queueStatus {
+		if !flag.Load() {
 			allReady = false
 			break
 		}
@@ -145,10 +144,8 @@ func (c *csmr) Start(ctx context.Context) error {
 	// Snapshot queue names from c.stack into an immutable status map.
 	// After this point, no keys are added/removed — only atomic values flip.
 	c.queueStatus = make(map[string]*atomic.Bool, len(c.stack))
-	c.readyOrder = make([]string, 0, len(c.stack))
 	for _, s := range c.stack {
 		c.queueStatus[s.queueName] = &atomic.Bool{}
-		c.readyOrder = append(c.readyOrder, s.queueName)
 	}
 
 	eg, gctx := errgroup.WithContext(ctx)
