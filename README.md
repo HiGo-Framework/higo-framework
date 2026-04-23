@@ -104,8 +104,8 @@ All configuration is loaded from environment variables via `secrets.Secret`:
 | `APP_NAME` | `app` | Application name for telemetry |
 | `HTTP_PORT` | `8000` | HTTP server port |
 | `GRPC_PORT` | `8001` | gRPC server port |
-| `INS_ENDPOINT` | `localhost:4317` | OTLP collector endpoint |
-| `INS_USE_GRPC` | `true` | Use gRPC for OTLP export |
+| `OTEL_ENDPOINT` | `localhost:4317` | OTLP collector endpoint |
+| `OTEL_USE_GRPC` | `true` | Use gRPC for OTLP export |
 | `AMQP_URI` | `amqp://guest:guest@localhost:5672` | RabbitMQ connection URI |
 | `PYROSCOPE_ENABLED` | `false` | Enable Pyroscope profiling |
 | `PYROSCOPE_SERVER_ADDRESS` | `http://localhost:9999` | Pyroscope server URL |
